@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="content-siswa">
+    <h2 class="title">Data Siswa</h2>
+    <hr>
+    <a href="{% url 'add-siswa' %}" class="btn btn-primary mb-1">Add New</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Male</th>
+          <th scope="col">Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for siswa in siswas %}
+          <tr>
+            <td>{{siswa.id}}</td>
+            <td>{{siswa.name}}</td>
+            <td>{{siswa.male}}</td>
+            <td>{{siswa.address}}</td>
+            <td>
+              <a href="{% url 'edit-siswa' siswa.id %}" class="btn btn-outline-info btn-sm"><i class="fa fa-edit mr-2"></i>Edit</a>
+              <a href="{% url 'delete-siswa' siswa.id %}" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o mr-2"></i>Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock content %}

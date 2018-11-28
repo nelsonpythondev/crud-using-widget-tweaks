@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+  <div class="content-siswa">
+    <h2 class="title">Add Siswa</h2>
+    <hr>
+
+    <form action="{% if edit %}{% url 'edit-siswa' siswaSingle.id %}{% else %}{% url 'add-siswa' %}{% endif %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group{% if form.name.errors %} has-error{% endif %}">
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+        {% render_field form.name value=siswaSingle.name class="form-control" placeholder="Enter name .."%}
+        {% for error in form.name.errors %}
+          <p class="help-block">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="form-group{% if form.male.errors %} has-error{% endif %}">
+        <label for="{{ form.male.id_for_label }}">{{ form.male.label }}</label>
+        {% render_field form.male value=siswaSingle.male class="form-control" placeholder="Enter male .."%}
+        {% for error in form.male.errors %}
+          <p class="help-block">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="form-group{% if form.address.errors %} has-error{% endif %}">
+        <label for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+        {% render_field form.address value=siswaSingle.address class="form-control" placeholder="Enter address .."%}
+        {% for error in form.address.errors %}
+          <p class="help-block">{{ error }}</p>
+        {% endfor %}
+      </div>
+      <a href="{% url 'list-siswa' %}" class="btn btn-outline-info mr-2">Cancel</a>
+      <button type="submit" class="btn btn-outline-primary">Save</button>
+    </form>
+
+
+  </div>
+
+{% endblock content %}
